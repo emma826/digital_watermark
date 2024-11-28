@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Home | 2020/244865</title>
+	<link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<link
+		href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500" rel="stylesheet" />
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/lib/dropzone/min/dropzone.min.css">
+</head>
+
+<body class="nav-fixed bg-light">
+
+	<%- include("./includes/navbar") %>
+
+		<div id="layoutDrawer">
+
+			<%- include("./includes/sidebar") %>
+
+				<div id="layoutDrawer_content">
+					<main>
+						<div class="container-xl px-5 py-4">
+
+							<div class="card">
+								<div class="card-body">
+
+									<div style="overflow: hidden;" method="post" class="dropzone rounded" id="myAwesomeDropzone"
+										data-plugin="dropzone" data-previews-container="#file-previews"
+										data-upload-preview-template="#uploadPreviewTemplate">
+										<form action="/project/upload_img" method="post" id="upload_img" style="position: relative;">
+											<!-- <button type="submit">submit</button> -->
+											<input name="file" name="avatar" id="project_img" type="file" style="display: block; width: 100%; height: 200px; position: absolute; opacity: 0;" />
+											
+										</form>
+
+										<div class="dz-message needsclick">
+											<i class="material-icons" style="font-size: 60px;">
+												upload
+											</i>
+											<h3>Create A Project</h3>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="pt-5">
+
+								<div class="d-flex justify-content-between align-items-end">
+									<h2 class="display-6 mb-0">Recent Projects</h2>
+								</div>
+								<hr class="mt-2 mb-5" />
+
+								<div class="row g-4" id="recent_project"></div>
+
+							</div>
+
+						</div>
+					</main>
+				</div>
+		</div>
+		<script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script type="module" src="/js/material.js"></script>
+		<script src="/js/scripts.js"></script>
+
+		<!-- <script src="/js/sb-customizer.js"></script> -->
+		<script src="/scripts/upload_img.js"></script>
+		<!-- <script src="/scripts/side_pro.js" defer></script> -->
+
+
+</body>
+
+</html>

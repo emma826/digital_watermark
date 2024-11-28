@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Create Project | 2020/244865</title>
+	<link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<link
+		href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500" rel="stylesheet" />
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/lib/dropzone/min/dropzone.min.css">
+
+	<style type="text/css">
+
+		#layoutDrawer_nav {
+			display: none;
+		}
+
+		/* #layoutDrawer {
+			padding-left: -100px;
+		} */
+
+	</style>
+</head>
+
+<body class="nav-fixed bg-light">
+
+	<%- include("../includes/navbar") %>
+
+		<div id="layoutDrawer">
+
+			<%- include("../includes/sidebar") %>
+
+				<div id="layoutDrawer_content"  style="margin: 0px; padding: 0px;">
+					<main>
+						<div class="container-xl  py-4">
+
+							<div class="row g-4 d-flex px-3">
+								<div class="col-6 card" >
+									<div style="height: auto;">
+										<div class="card-body py-5">
+											<h2 class="text-center pt-5 pb-4 fw-600">
+												Name Your Project
+											</h2>
+
+											<div class="alert alert-success" id="success" style="display: none;"></div>
+											<div class="alert alert-danger" id="error" style="display: none;"></div>
+
+
+											<mwc-textfield label="Name" class="w-100 my-4" id="project_name"></mwc-textfield>
+											<input type="hidden" id="project_id" value="<%- project_details.id %>">
+											<button style="display: block; margin: auto;" id="name" class="btn btn-success py-3 my-4">Submit</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-6">
+									<div style="width: 100%; min-height: 500px; background-repeat: no-repeat; background-size: cover; background-position: center; background-image : url(/uploads/original_file/<%- project_details.file_name %>)"></div>
+								</div>
+							</div>
+
+						</div>
+					</main>
+				</div>
+		</div>
+		<script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script type="module" src="/js/material.js"></script>
+		<script src="/js/scripts.js"></script>
+
+		<!-- <script src="/js/sb-customizer.js"></script> -->
+		<script src="/scripts/create_project.t.js"></script>
+</body>
+
+</html>

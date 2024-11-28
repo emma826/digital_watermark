@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Verify | 2020/244865</title>
+	<link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<link
+		href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500" rel="stylesheet" />
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/lib/dropzone/min/dropzone.min.css">
+
+	<style type="text/css">
+		#layoutDrawer_nav {
+			display: none;
+		}
+
+		/* #layoutDrawer {
+			padding-left: -100px;
+		} */
+	</style>
+</head>
+
+<body class="nav-fixed bg-light">
+
+	<i%- include("../includes/navbar") %>
+
+		<div id="layoutDrawer">
+
+			<div%- include("../includes/sidebar") %>
+
+				<div id="layoutDrawer_content" style="margin: 0px; padding: 0px;">
+					<main>
+						<div class="container">
+
+							<div class="row justify-content-center">
+								<div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8">
+									<div class="card card-raised shadow-10 mt-3 mt-xl-10 mb-4">
+										<div class="card-body p-5">
+
+											<div class="text-center mb-4">
+												<h1 class="display-5 fw-bold mb-0">Verify Signature</h1>
+											</div>
+
+											<div class="mb-4 alert alert-danger" style="display: none;" id="error"></div>
+											<div class="mb-4 alert alert-success" style="display: none;" id="success"></div>
+
+											<div>
+												<div class="mb-4"><mwc-textfield class="w-100" id="public_key"
+														label="Public Key" outlined=""></mwc-textfield></div>
+												<div class="mb-4"><mwc-textfield class="w-100" id="signature"
+														label="Signature" outlined=""></mwc-textfield></div>
+
+												<div class="mb-4 rounded text-center position-relative"
+													style="border: 2px solid gray; overflow: hidden;">
+													<input name="file" name="avatar" id="verify_image" type="file"
+														style="display: block; width: 100%; height: 500px; position: absolute; opacity: 0;" />
+													<div id="image_container">
+														<i class="material-icons" style="font-size: 60px;">
+															upload
+														</i>
+														<h6>Upload Image</h6>
+													</div>
+												</div>
+
+												<button class="btn btn-primary d-block mx-auto"
+													id="verify_btn">Verify</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Auth card message-->
+								<div class="text-center mb-5"><a class="small fw-500 text-decoration-none link-white"
+										href="app-auth-register-basic.html">Need an account? Sign up!</a></div>
+							</div>
+						</div>
+
+				</div>
+				</main>
+		</div>
+		</div>
+		<script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script type="module" src="/js/material.js"></script>
+		<script src="/js/scripts.js"></script>
+
+		<!-- <script src="/js/sb-customizer.js"></script> -->
+		<script src="/scripts/verify_image.js"></script>
+
+</body>
+
+</html>
