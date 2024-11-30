@@ -160,6 +160,7 @@ digital_signature.addEventListener("click", async () => {
 		.then(data => {
 			if (data.success) {
 				console.log("Image signed successfully");
+				console.log(data.success)
 			} else {
 				console.error("Signature failed:", data.errors);
 			}
