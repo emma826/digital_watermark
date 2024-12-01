@@ -39,6 +39,27 @@
 
 <body class="nav-fixed bg-light">
 
+	<div class="modal fade" id="compress_btn" tabindex="-1" aria-labelledby="exampleModalCenteredLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenteredLabel">Signature Details</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="my-3">
+						<mwc-textfield class="w-100" id="public_key" label="Public Key"
+						outlined=""></mwc-textfield>
+					</div>
+					<div class="my-3">
+						<mwc-textfield class="w-100" id="signature" label="Signature"
+						outlined=""></mwc-textfield>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Modal-->
 	<div class="modal fade" id="compress_btn" tabindex="-1" aria-labelledby="exampleModalCenteredLabel"
