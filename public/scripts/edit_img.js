@@ -159,8 +159,7 @@ digital_signature.addEventListener("click", async () => {
 		.then(res => res.json())
 		.then(data => {
 			if (data.success) {
-				console.log("Image signed successfully");
-				console.log(data.success)
+				document.getElementById("public_key").innerHTML = data.success.public_ke
 			} else {
 				console.error("Signature failed:", data.errors);
 			}
