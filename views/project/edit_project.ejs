@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Edit Project | 2020/244865</title>
+	<link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<link
+		href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500" rel="stylesheet" />
+	<link href="/css/styles.css" rel="stylesheet" />
+
+	<script>
+		const project_id = "<%= project_id %>"
+	</script>
+
+	<style>
+		.panel_parent_container {
+			position: relative;
+		}
+
+		.edit_panel {
+			position: fixed;
+			right: 0;
+			width: 330px;
+			bottom: 0;
+			top: 0;
+			padding-top: 80px;
+		}
+	</style>
+</head>
+
+<body class="nav-fixed bg-light">
+
+	<div class="modal fade" id="compress_btn" tabindex="-1" aria-labelledby="exampleModalCenteredLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenteredLabel">Signature Details</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="my-3">
+						<mwc-textfield class="w-100" id="public_key" label="Public Key"
+						outlined=""></mwc-textfield>
+					</div>
+					<div class="my-3">
+						<mwc-textfield class="w-100" id="signature" label="Signature"
+						outlined=""></mwc-textfield>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal-->
+	<div class="modal fade" id="compress_btn" tabindex="-1" aria-labelledby="exampleModalCenteredLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenteredLabel">Compress Image</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="float-end pt-2 h6" id="slider_text"></div>
+					<div class="pe-2">
+						<mwc-slider id="compress_value" class="w-100 me-5" value="0" min="0" max="100"></mwc-slider>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-text-primary" id="compressButton" type="button"
+						data-bs-dismiss="modal">Apply</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="watermark_modal" tabindex="-1" aria-labelledby="watermark_modalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="exampleModalCenteredLabel">Add Watermark</h5>
+						<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="alert alert-danger" id="error" style="display: none;"></div>
+
+					<div class="pe-2 mt-4">
+						<h6 class="fw-bold">Watermark Opacity</h6>
+
+						<span class="float-end" id="opacityLabel"></span>
+						<mwc-slider id="watermark_opacity" label="Watermark Opacity" class="w-100 me-5" value="0"
+							min="0" step="10" max="100"></mwc-slider>
+					</div>
+					<div>
+						<mwc-tab-bar class="nav nav-tabs" role="tablist">
+							<mwc-tab class="active" label="Text" data-bs-toggle="tab" role="tab" aria-selected="true"
+								id="text_watermark" data-bs-target="#text_watermark_value"
+								aria-controls="text_watermark_value_btn"></mwc-tab>
+							<mwc-tab label="Image" data-bs-toggle="tab" role="tab" aria-selected="false"
+								id="image_watermark" data-bs-target="#image_watermark_value"
+								aria-controls="image_watermark_value_btn"></mwc-tab>
+						</mwc-tab-bar>
+
+						<div class="tab-content mb-3">
+							<div class="tab-pane show active" role="tabpanel" id="text_watermark_value"
+								aria-labelledby="navPillsFillDemoDemoTab">
+								<div class="my-3"><mwc-textfield class="w-100" id="watermarkText" label="Text Watermark"
+										outlined=""></mwc-textfield></div>
+
+							</div>
+
+							<div class="tab-pane position-relative py-3" role="tabpanel" id="image_watermark_value"
+								aria-labelledby="navPillsFillDemoHtmlTab">
+								<div class="rounded text-center position-relative"
+									style="border: 2px solid gray; overflow: hidden;">
+									<input name="file" name="avatar" id="image_for_watermark" type="file"
+										style="display: block; width: 100%; height: 500px; position: absolute; opacity: 0;" />
+									<div id="image_container">
+										<i class="material-icons" style="font-size: 60px;">
+											upload
+										</i>
+										<h6>Upload Image</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-text-primary me-2" id="add_watermark_button" type="button">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<%- include("../includes/navbar") %>
+
+		<div id="layoutDrawer">
+
+			<%- include("../includes/sidebar") %>
+
+				<div id="layoutDrawer_content">
+					<main>
+						<div class="container-xl ">
+
+							<div class="panel_parent_container">
+
+								<div class="edit_panel bg-white px-3">
+									<div class="py-3">
+										<div class="row g-2 px-1">
+											<div class="col-6" style="cursor: pointer;" id="downloadButton">
+												<div class="card">
+													<div class="card-body text-center fw-500"
+														style="background-color: gray;">Download</div>
+												</div>
+											</div>
+											<div class="col-6" style="cursor: pointer;" id="saveButton">
+												<div class="card">
+													<div class="card-body text-center fw-500 bg-success">Save</div>
+												</div>
+											</div>
+										</div>
+
+										<h6 class="fw-600 py-3">Basic Editing Tools</h6>
+										<div class="row g-2 px-1">
+											<div class="col-6" style="cursor: pointer;" id="digital_signature">
+												<div class="card">
+													<div class="card-body text-center fw-500">
+														<i class="d-block w-100 text-center material-icons fs-2">
+															add
+														</i>
+														Digital Signature
+													</div>
+												</div>
+											</div>
+											<div class="col-6" style="cursor: pointer;" style="padding: 5px 0px;">
+												<div class="card py-2" data-bs-toggle="modal"
+													data-bs-target="#watermark_modal">
+													<div class="card-body text-center fw-500">
+														<i class="d-block w-100 text-center material-icons fs-2">
+															branding_watermark
+														</i>
+														Add Watermark
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<h6 class="fw-600 py-3">Image Manipulation Control</h6>
+										<div class="row g-2 px-1">
+											<div class="col-6" style="cursor: pointer;" id="rotateButton">
+												<div class="card">
+													<div class="card-body text-center fw-500">
+														<i class="d-block w-100 text-center material-icons fs-2">
+															crop_rotate
+														</i>
+														Rotate
+													</div>
+												</div>
+											</div>
+											<div class="col-6" style="cursor: pointer;" data-bs-toggle="modal"
+												data-bs-target="#compress_btn">
+												<div class="card">
+													<div class="card-body text-center fw-500">
+														<i class="d-block w-100 text-center material-icons fs-2">
+															aspect_ratio
+														</i>
+														Compress
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<h6 class="fw-600 py-3">Preview Panel</h6>
+										<div class="row g-2 px-1">
+											<div class="col-6" style="cursor: pointer;" id="zoomIn">
+												<div class="card">
+													<div class="card-body text-center fw-500">
+														<i class="d-block w-100 text-center material-icons fs-2">
+															zoom_in
+														</i>
+														Zoom In
+													</div>
+												</div>
+											</div>
+											<div class="col-6" style="cursor: pointer;" id="zoomOut">
+												<div class="card">
+													<div class="card-body text-center fw-500">
+														<i class="d-block w-100 text-center material-icons fs-2">
+															zoom_out
+														</i>
+														Zoom Out
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div style="margin-right: 330px; overflow: hidden;" class="py-3 pe-3"
+									id="image-container">
+									<img id="image" style="display: block; width: 100%; margin: auto;"
+										src="/uploads/original_file/<%- project_details. file_name %>" alt="">
+									<canvas id="canvas" style="display: none; width: 100%; margin: auto;"></canvas>
+								</div>
+							</div>
+
+						</div>
+					</main>
+				</div>
+		</div>
+		<script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script type="module" src="/js/material.js"></script>
+		<script src="/js/scripts.js"></script>
+
+		<script src="/scripts/edit_img.js"></script>
+</body>
+
+</html>
