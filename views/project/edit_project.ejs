@@ -48,14 +48,10 @@
 					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div class="my-3">
-						<mwc-textfield class="w-100" id="public_key" label="Public Key"
-						outlined=""></mwc-textfield>
-					</div>
-					<div class="my-3">
-						<mwc-textfield class="w-100" id="signature" label="Signature"
-						outlined=""></mwc-textfield>
-					</div>
+					<h5>Public Key</h5>
+					<div class="my-3 card p-3 public_key"></div>
+					<h5>Signature</h5>
+					<div class="my-3 card signature p-3"></div>
 				</div>
 			</div>
 		</div>
@@ -177,7 +173,7 @@
 										<h6 class="fw-600 py-3">Basic Editing Tools</h6>
 										<div class="row g-2 px-1">
 											<div class="col-6" style="cursor: pointer;" id="digital_signature" data-bs-toggle="modal"
-											data-bs-target="#compress_btn">
+											data-bs-target="#digital_signature_modal">
 												<div class="card">
 													<div class="card-body text-center fw-500">
 														<i class="d-block w-100 text-center material-icons fs-2">
