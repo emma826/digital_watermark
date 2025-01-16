@@ -39,7 +39,7 @@
 
 <body class="nav-fixed bg-light">
 
-	<div class="modal fade" id="digital_signature" tabindex="-1" aria-labelledby="exampleModalCenteredLabel"
+	<div class="modal fade" id="digital_signature_modal" tabindex="-1" aria-labelledby="exampleModalCenteredLabel"
 		aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -176,7 +176,8 @@
 
 										<h6 class="fw-600 py-3">Basic Editing Tools</h6>
 										<div class="row g-2 px-1">
-											<div class="col-6" style="cursor: pointer;" id="digital_signature">
+											<div class="col-6" style="cursor: pointer;" id="digital_signature" data-bs-toggle="modal"
+											data-bs-target="#compress_btn">
 												<div class="card">
 													<div class="card-body text-center fw-500">
 														<i class="d-block w-100 text-center material-icons fs-2">
