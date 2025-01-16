@@ -107,28 +107,30 @@ add_watermark_button.addEventListener("click", async () => {
 			return
 		}
 
+		// Clear any existing watermark by redrawing the original image
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(currentImage, 0, 0, currentImage.width, currentImage.height);
+
+		// Apply the new image watermark
+		const watermarkWidth = image.width;
+		const watermarkHeight = image.height;
+		const x = (canvas.width - watermarkWidth) / 2;
+		const y = (canvas.height - watermarkHeight) / 2;
+
 		ctx.save();
-		const watermarkWidth = canvas.width / 5; // Scale watermark width relative to canvas
-		const watermarkHeight = (image_watermark.height / image_watermark.width) * watermarkWidth; // Maintain aspect ratio
-
-		// Calculate position to center the watermark
-		const xPosition = (canvas.width - watermarkWidth) / 2; // Center horizontally
-		const yPosition = (canvas.height - watermarkHeight) / 2; // Center vertically
-
-		// Draw the watermark on the canvas
-		ctx.globalAlpha = 0.5; // Set opacity for the watermark
-		ctx.drawImage(image_watermark, xPosition, yPosition, watermarkWidth, watermarkHeight);
-		ctx.globalAlpha = 1;
-
-
+		ctx.globalAlpha = opacity;
+		ctx.drawImage(image, x, y, watermarkWidth, watermarkHeight);
 		ctx.restore();
 
-		// Update the image container to display the new watermarked image
-
-		main_img.src = canvas.toDataURL("image/png");
+		main_img.src = canvas.toDataURL();
 
 	}
 	else {
+
+		// Clear any existing watermark by redrawing the original image
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(currentImage, 0, 0, currentImage.width, currentImage.height);
+
 		ctx.save();
 		ctx.globalAlpha = opacity;
 		ctx.font = "80px Arial";
@@ -149,30 +151,8 @@ compress_value.addEventListener("change", (e) => {
 	slider_text.innerHTML = `${compress_value.value}%`
 })
 
-digital_signature.addEventListener("click", () => {
-	var params = {
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({ project_id }),
-		method: "POST"
-	}
 
-	saveButton.click();
-
-	fetch("/project/sign_image", params)
-		.then(res => res.json())
-		.then(data => {
-			if (data.public_key) {
-				signature_id.innerHTML = data.signature
-				public_key.innerHTML = data.public_key
-			} else {
-				console.error("Signature failed:", data.errors);
-			}
-		})
-})
-
-saveButton.addEventListener("click", () => {
+const save_img = async () => {
 	// Convert canvas content to a Blob
 	canvas.toBlob((blob) => {
 		if (!blob) {
@@ -194,6 +174,7 @@ saveButton.addEventListener("click", () => {
 			.then((data) => {
 				if (data.success) {
 					console.log("Image uploaded successfully");
+					return true
 				} else {
 					console.error("Upload failed:", data.errors);
 				}
@@ -202,7 +183,40 @@ saveButton.addEventListener("click", () => {
 				console.error("Error uploading image:", error);
 			});
 	}, "image/jpeg", 1);
-});
+}
+
+digital_signature.addEventListener("click", async () => {
+	var params = {
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ project_id }),
+		method: "POST"
+	}
+
+	const save_img_func = await save_img();
+
+	setTimeout(() => {
+		fetch("/project/sign_image", params)
+			.then(res => res.json())
+			.then(data => {
+				if (data.public_key) {
+					signature_id.innerHTML = data.signature
+					public_key.innerHTML = data.public_key
+				} else {
+					console.error("Signature failed:", data.errors);
+				}
+			})
+			.catch(error => {
+				console.error("Error signing image:", error);
+			});
+	}, 1000);
+
+
+
+})
+
+saveButton.addEventListener("click", save_img);
 
 // Download button functionality
 downloadButton.addEventListener("click", () => {
